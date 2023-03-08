@@ -104,8 +104,8 @@ class HamiltonianSystem:
         """
         with torch.no_grad():
             ts = torch.linspace(0, 1, sequence_length) * T
-            # x0 = torch.tensor(x0, dtype=torch.float32, requires_grad=False)
-            x0 = x0.clone().detach()
+            x0 = torch.tensor(x0, dtype=torch.float32, requires_grad=False)
+            # x0 = x0.clone().detach()
             xs = torch2numpy(
                 odeint(
                     self.f,
@@ -114,28 +114,6 @@ class HamiltonianSystem:
                 ).permute(1, 0, 2)
             )
         return xs, torch2numpy(ts)
-
-    def generate_purturbed_ensemble(
-        self, x0, sequence_length, T, dx=0.01, N=2, scale=True
-    ):
-        xs = []
-        if scale:
-            x0 = self.unscale_output(x0)
-
-        with torch.no_grad():
-            for n in range(N):
-                dx0 = np.random.uniform(low=-dx, high=dx, size=x0.shape)
-                x0_per = torch.tensor(
-                    x0 + dx0, dtype=torch.float32, requires_grad=False
-                )
-                xsi, _ = self.generate_sequence(x0_per, sequence_length, T)
-                xs.append(xsi)
-
-        out = np.stack(xs)
-        if scale:
-            out = self.scale_output(out)
-
-        return out
 
     def scale_output(self, x):
         return (x - self.mean_std_ys[0]) / self.mean_std_ys[1]
@@ -179,7 +157,6 @@ class SimplePendulum(HamiltonianSystem):
         self.name = "simple-pendulum"
 
     def sample_ics(self, N, rng, ic_mode=None):
-        # if ic_mode == "greydanus" or ic_mode is None:
         out = []
         n = 0
 
@@ -189,7 +166,7 @@ class SimplePendulum(HamiltonianSystem):
             if energy < 9.81:
                 out.append(x0)
                 n += 1
-        return torch.tensor(np.array(out), dtype=torch.float32)
+        return np.array(out)
 
     def hamiltonian(self, x, m=1, g=9.81, r=1):
         q, p = torch.split(x, x.shape[-1] // 2, dim=-1)
@@ -213,10 +190,7 @@ class SpringPendulum(HamiltonianSystem):
         self.name = "spring-pendulum"
 
     def sample_ics(self, N, rng, ic_mode=None):
-
-        out_ics = torch.tensor(
-            rng.uniform(low=-0.25, high=0.25, size=(N, 4)), dtype=torch.float32
-        )
+        out_ics = rng.uniform(low=-0.25, high=0.25, size=(N, 4))
         return out_ics
 
     def hamiltonian(self, x):
@@ -253,7 +227,7 @@ class HenonHeiles(HamiltonianSystem):
             if energy < 1 / (6 * self.mu**2):
                 out.append(x0)
                 n += 1
-        out_ics = torch.tensor(np.array(out), dtype=torch.float32)
+        out_ics =(np.array(out))
         return out_ics
 
     def hamiltonian(self, x):

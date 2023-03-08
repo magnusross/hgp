@@ -6,6 +6,7 @@ from pathlib import Path
 
 import hydra
 import numpy as np
+import torch
 from omegaconf import DictConfig
 
 import hgp
@@ -17,6 +18,11 @@ from hgp.misc.plot_utils import (
 )
 from hgp.misc.torch_utils import numpy2torch, torch2numpy
 from hgp.misc.train_utils import seed_everything
+from hgp.misc.settings import settings
+
+device = settings.device
+if device.type == 'cuda':
+    torch.set_default_tensor_type('torch.cuda.FloatTensor')
 
 log = logging.getLogger(__name__)
 
@@ -96,14 +102,14 @@ def run_experiment(config: DictConfig):
 
     plot_longitudinal(
         system,
-        preds[:, : min(np.shape(preds)[1], 5)],
+        torch2numpy(preds[:, : min(np.shape(preds)[1], 5)]),
         torch2numpy(model.observation_likelihood.variance),
         save=os.path.join(os.getcwd(), f"{config.model.name}_trajpost"),
     )
 
     plot_longitudinal(
         system,
-        train_preds[:, : max(np.shape(train_preds)[1], 5)],
+        torch2numpy(train_preds[:, : max(np.shape(train_preds)[1], 5)]),
         torch2numpy(model.observation_likelihood.variance),
         save=os.path.join(os.getcwd(), f"train_{config.model.name}_trajpost"),
         test_true=(system.trn.ts, system.trn.ys),

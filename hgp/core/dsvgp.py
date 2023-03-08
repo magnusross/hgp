@@ -29,20 +29,22 @@ from hgp.core.kernels import RBF, DerivativeRBF
 from hgp.misc import transforms
 from hgp.misc.ham_utils import build_J
 from hgp.misc.param import Param
+from hgp.misc.settings import settings
 
+torch.use_deterministic_algorithms(False)
 jitter = 1e-5
 
 
 def sample_normal(shape, seed=None):
     # sample from standard Normal with a given shape
     rng = np.random.RandomState() if seed is None else np.random.RandomState(seed)
-    return torch.tensor(rng.normal(size=shape).astype(np.float32))
+    return torch.tensor(rng.normal(size=shape).astype(np.float32)).to(settings.device)
 
 
 def sample_uniform(shape, seed=None):
     # random Uniform sample of a given shape
     rng = np.random.RandomState() if seed is None else np.random.RandomState(seed)
-    return torch.tensor(rng.uniform(low=0.0, high=1.0, size=shape).astype(np.float32))
+    return torch.tensor(rng.uniform(low=0.0, high=1.0, size=shape).astype(np.float32)).to(settings.device)
 
 
 def compute_divergence(dx, y):
@@ -99,7 +101,7 @@ class DSVGP_Layer(torch.nn.Module):
         )  # (M,D_in)
         self.Um = Param(
             # np.random.normal(size=(M, D_out)) * 1e-1,
-            torch.zeros((M, D_out)),
+            np.zeros((M, D_out)),
             name="Inducing distirbution (mean)",
         )  # (M,D_out)
 

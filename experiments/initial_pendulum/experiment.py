@@ -5,7 +5,6 @@ import hydra
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-import shutil
 import torch
 from matplotlib import cm
 from matplotlib.collections import LineCollection
@@ -16,6 +15,11 @@ import hgp
 from hgp.datasets.hamiltonians import load_system_from_name
 from hgp.misc.torch_utils import numpy2torch, torch2numpy
 from hgp.misc.train_utils import seed_everything
+from hgp.misc.settings import settings
+
+device = settings.device
+if device.type == 'cuda':
+    torch.set_default_tensor_type('torch.cuda.FloatTensor')
 
 log = logging.getLogger(__name__)
 

@@ -1,0 +1,11 @@
+model_type: hgp_subseq 
+num_features: 256 
+inducing_init: true
+num_inducing: 64
+q_diag: False
+shooting: False
+ts_dense_scale: 4
+name: hgp subsequence
+batch_length: 6
+batch_size: 32
+num_val_epochs: 10

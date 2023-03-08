@@ -1,0 +1,7 @@
+system_name: "spring-pendulum"
+seed: 6 
+frequency_train: 6
+frequency_test: 10
+data_obs_T: 16
+data_obs_noise_var: 0.05
+noise_rel: True

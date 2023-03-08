@@ -1,0 +1,7 @@
+system_name: "simple-pendulum"
+seed: 1
+frequency_train: 8
+frequency_test: 15
+data_obs_T: 8
+data_obs_noise_var: 0.05
+noise_rel: True

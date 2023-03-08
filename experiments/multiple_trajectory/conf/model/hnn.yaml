@@ -1,0 +1,10 @@
+model_type: nn
+flow_type: hnn 
+N_layers: 3
+N_nodes: 256
+name: hnn
+shooting: false
+ts_dense_scale: 4
+batch_length: 6
+batch_size: 32
+num_val_epochs: 2

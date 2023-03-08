@@ -1,0 +1,10 @@
+model_type: nn
+flow_type: node 
+N_layers: 3
+N_nodes: 256
+name: node
+shooting: false
+ts_dense_scale: 4
+batch_length: 6
+batch_size: 16
+num_val_epochs: 10

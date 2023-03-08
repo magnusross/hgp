@@ -1,0 +1,14 @@
+
+model_type: gpode 
+inducing_init: true
+num_features: 256 
+num_inducing: 48
+q_diag: False
+dimwise: False
+shooting: True
+constraint_type: "gauss"
+constraint_trainable: false
+constraint_initial_scale: 1e-3
+shooting_time_factor: 4
+ts_dense_scale: 4
+name: gpode_shooting 

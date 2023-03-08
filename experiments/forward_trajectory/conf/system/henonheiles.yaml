@@ -1,0 +1,7 @@
+system_name: "henon-heiles"
+seed: 13
+frequency_train: 4
+frequency_test: 10
+data_obs_T: 40
+data_obs_noise_var: 0.05
+noise_rel: True

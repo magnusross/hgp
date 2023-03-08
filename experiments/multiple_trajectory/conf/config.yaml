@@ -1,0 +1,25 @@
+solver: "dopri5"
+use_adjoint: False
+ts_dense_scale: 4
+
+eval_samples: 32
+init_noise: 0.10
+num_iter: 2500
+lr: 3e-3
+log_freq: 20
+exp_name: multiple_trajectory
+exp_dir: null 
+
+defaults:
+  - _self_
+  - system: henonheiles
+  - model: hgp_cons_shooting 
+  - override hydra/launcher: joblib
+
+hydra:
+  run:
+    dir: outputs/${exp_name}/${system.system_name}/${now:%Y-%m-%d}/${now:%H-%M-%S}/
+  launcher:
+    n_jobs: 4
+  job:
+    chdir: true

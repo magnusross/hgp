@@ -1,0 +1,15 @@
+# model:
+model_type: hgp 
+inducing_init: true
+num_features: 256 
+num_inducing: 128
+q_diag: False
+shooting: True
+constraint_type: "gauss"
+constraint_trainable: false
+constraint_initial_scale: 1e-3
+constrain_energy: true
+energy_constraint_initial_scale: 5e-2
+shooting_time_factor: 4
+ts_dense_scale: 4
+name: hgp 

@@ -1,0 +1,8 @@
+model_type: hgp 
+inducing_init: true
+num_features: 256 
+num_inducing: 48
+q_diag: False
+shooting: False
+ts_dense_scale: 4
+name: hgp_standard

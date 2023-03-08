@@ -1,0 +1,30 @@
+model:
+  inducing_init: True
+  num_features: 256 
+  num_inducing: 12
+  q_diag: False
+  dimwise: False
+  shooting: false
+  constraint_type: "gauss"
+  constraint_trainable: false
+  constraint_initial_scale: 1e-3
+  constrain_energy: true
+  energy_constraint_initial_scale: 5e-2
+  shooting_time_factor: 4
+  ts_dense_scale: 4 
+
+solver: "dopri5"
+use_adjoint: false
+eval_samples: 6
+init_noise: 0.1
+num_iter: 2500
+lr: 3e-3
+log_freq: 20
+exp_name: initial-pendulum
+
+hydra:
+  run:
+    dir: outputs/${exp_name}/${now:%Y-%m-%d}/${now:%H-%M-%S}/
+  job:
+    chdir: true
+

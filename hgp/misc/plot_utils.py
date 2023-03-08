@@ -9,17 +9,6 @@ import numpy as np
 from hgp.models.builder import compute_summary
 
 
-if shutil.which("latex"):
-    matplotlib.rc("text", usetex=True)
-    matplotlib.rc("text.latex", preamble=r"\usepackage[cm]{sfmath}")
-    font = {
-        "size": 10
-    }
-    matplotlib.rc("font", **font)
-else:
-    print("LaTeX not installed, using default backend.")
-
-
 def plot_predictions(data, test_pred, save=None, test_true=None, model_name="Model"):
 
     test_ts, test_ys = data.tst.ts, data.tst.ys

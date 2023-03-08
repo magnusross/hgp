@@ -19,14 +19,6 @@ from hgp.misc.train_utils import seed_everything
 
 log = logging.getLogger(__name__)
 
-if shutil.which("latex"):
-    matplotlib.rc("text", usetex=True)
-    matplotlib.rc("text.latex", preamble=r"\usepackage[cm]{sfmath}")
-    font = {"size": 10}
-    matplotlib.rc("font", **font)
-else:
-    print("LaTeX not installed, using default backend.")
-
 
 @hydra.main(config_path=".", config_name="config", version_base="1.2")
 def run_experiment(config: DictConfig):

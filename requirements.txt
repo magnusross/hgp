@@ -14,3 +14,6 @@ setuptools==61.2.0
 torch==1.13.0
 torchdiffeq==0.2.3
 tqdm==4.64.0
+ipython==8.2.0
+ipykernel==5.5.5
+notebook

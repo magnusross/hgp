@@ -3,8 +3,7 @@
 ![Diagram of the HGP](model_diagram.png)
 
 
-Implements Hamiltonian Gaussian processes, from the paper "Learning Energy Conserving Dynamics Efficiently with Hamiltonian Gaussian Processes" by Magnus Ross and Markus Heinonen, to appear in TMLR (March 2023). You can find a preprint [here](https://arxiv.org/abs/2303.01925).
-
+Implements Hamiltonian Gaussian processes, from the paper "Learning Energy Conserving Dynamics Efficiently with Hamiltonian Gaussian Processes" by Magnus Ross and Markus Heinonen, to appear in TMLR (March 2023). You can find a preprint [here](https://arxiv.org/abs/2303.01925), and some animations showing model predictions [here](https://magnusross.github.io/HamiltonianGPs/). 
 This implementation was based on code developed by [Pashupati Hedge](https://github.com/hegdepashupati), for the [GP-ODE model](https://github.com/hegdepashupati/gaussian-process-odes).
 
 ### Installation
